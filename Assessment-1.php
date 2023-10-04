@@ -5,52 +5,82 @@
     <title>assessment</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
     <style>
-
-        body {
-            background-color: lightgreen
-        }
-        .name {           
-            border-collapse: collapse;
-            width: 100%;
-            color: black;
-            font-family: monospace;
-            font-size: 60px;
-            text-align: center;
-        }
+    body {
+        background-color: darkcyan;
+        font-family: Arial, sans-serif;
+        color: #333;
+        background-image: url('emp.jpg');
         
-        
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            color: black;
-            font-family: monospace;
-            font-size: 25px;
-            text-align: left;
-        }
+    }
+    
+    .work {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+      
+    .name {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'Pacifico', cursive;
+    font-size: 80px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: explode 10s ease-in-out infinite alternate;
+}
 
-        th {
-            background-color: #588c7e;
-            color: black;
-        }
+@keyframes explode {
+    0% {
+        color: darkblue;
+    }
+    25% {
+        color: darkgreen;
+    }
+    50% {
+        color: darkgoldenrod;
+    }
+    75% {
+        color: darkcyan;
+    }
+    100% {
+        color: darkred;
+    }
+}
 
-        tr:nth-child(even) td {
-            background-color: lightgreen;
-        }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        color: #333;
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        text-align: left;
+        border: 4px solid #00bcd4;
+    }
 
-        td {
-            padding: 10px;
-        }
+    th {
+        background-color: #00bcd4;
+        color: black;
+    }
 
-        .total {
-            color: orange;
-            text-decoration-color: black;
+    tr:nth-child(even) td {
+        background-color: #f2f2f2;
+    }
 
-        }
-    </style>
+    td {
+        padding: 10px;
+    }
+
+    .total {
+        color: darkcyan;
+        text-decoration-color: black;
+        font: normal;
+        font-weight: 500;
+    }
+</style>
 </head>
 
 <body>
-   <div class="name">Employee List</div>
+   <div class="name">Personnel List</div>
     <table>
         <tr>
             <th>Name</th>
@@ -63,8 +93,8 @@
 
         <?php
         $host = "localhost";
-        $user = "anouar";
-        $password = null;
+        $user = "kembu";
+        $password = "poes2006";
         $database = "assessment";
         $conn = mysqli_connect($host, $user, $password, $database);
 
@@ -129,19 +159,19 @@
                 echo "<input type='hidden' name='update_id' value='" . $row["id"] . "' />";
                 echo "<div class='mb-3'>";
                 echo "<label for='name' class='form-label'>Name</label>";
-                echo "<input type='text' class='form-control' id='name' name='name' value='" . $row["name"] . "'>";
+                echo "<input type='text' class='form-control' id='name' name='name' value='" . $row["name"] . "'required>";
                 echo "</div>";
                 echo "<div class='mb-3'>";
                 echo "<label for='id' class='form-label'>ID</label>";
-                echo "<input type='number' class='form-control' id='id' name='id' value='" . $row['id'] . "'>";
+                echo "<input type='number' class='form-control' id='id' name='id' value='" . $row['id'] . "'required>";
                 echo "</div>";
                 echo "<div class='mb-3'>";
-                echo "<label for='function' class='form-label'>Function</label>";
-                echo "<input type='text' class='form-control' id='function' name='function' value='" . $row["function"] . "'>";
+                echo "<label for='function' class='form-label'>Function</label> ";
+                echo "<input type='text' class='form-control' id='function' name='function' value='" . $row["function"] . "'required>";
                 echo "</div>";
                 echo "<div class='mb-3'>";
                 echo "<label for='salary' class='form-label'>Salary</label>";
-                echo "<input type='number' class='form-control' id='salary' name='salary' value='" . $row["salary"] . "'>";
+                echo "<input type='number' class='form-control' id='salary' name='salary' value='" . $row["salary"] . "'required>";
                 echo "</div>";
                 echo "</div>";
                 echo "<div class='modal-footer'>";
@@ -161,46 +191,49 @@
 
         $conn->close();
         ?>
+
     </table>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-        +
-    </button>
+    +
+</button>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Toevoegen?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" action="insert.php">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Naam</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="number" class="form-label">Id</label>
-                            <input type="number" class="form-control" id="number" name="number" placeholder="Enter your Id">
-                        </div>
-                        <div class="mb-3">
-                            <label for="function" class="form-label">Function</label>
-                            <input type="text" class="form-control" id="function" name="function" placeholder="Enter your function">
-                        </div>
-                        <div class="mb-3">
-                            <label for="salary" class="form-label">Salary</label>
-                            <input type="number" class="form-control" id="salary" name="salary" placeholder="Enter your Salary">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nee</button>
-                            <button type="submit" class="btn btn-primary">Ja</button>
-                        </div>
-                    </form>
-                </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Toevoegen?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="insert.php">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Naam</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="number" class="form-label">Id</label>
+                        <input type="number" class="form-control" id="number" name="number" placeholder="Enter your Id" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="function" class="form-label">Function</label>
+                        <input type="text" class="form-control" id="function" name="function" placeholder="Enter your function" pattern="[A-Za-z]+" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="salary" class="form-label">Salary</label>
+                        <input type="number" class="form-control" id="salary" name="salary" placeholder="Enter your Salary" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nee</button>
+                        <button type="submit" class="btn btn-primary">Ja</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
