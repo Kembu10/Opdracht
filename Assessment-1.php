@@ -61,8 +61,8 @@
 
         <?php
         $host = "localhost";
-        $user = "anouar";
-        $password = null;
+        $user = "kembu";
+        $password = "poes2006";
         $database = "assessment";
         $conn = mysqli_connect($host, $user, $password, $database);
 

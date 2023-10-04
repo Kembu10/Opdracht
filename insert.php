@@ -6,7 +6,7 @@
 <body>
     <center>
         <?php
-        $conn = mysqli_connect("localhost", "anouar", "", "assessment");
+        $conn = mysqli_connect("localhost", "kembu", "poes2006", "assessment");
 
         // Check connection
         if($conn === false){
